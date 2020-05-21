@@ -25,6 +25,14 @@ class GamesController < ApplicationController
     render json: { status: 'Successfully destroyed', data: @game }, status: :ok
   end
 
+  def update
+    if @game.update(game_params)
+      render json: @game # render the updated record back
+    else
+      render json: @game.errors, status: :unprocessable_entity # render errors
+    end
+  end
+
   private
 
   def set_game
